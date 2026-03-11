@@ -1,10 +1,11 @@
 import React from 'react'
 import TaskCard from './TaskCard'
 import { Plus } from 'lucide-react'
+import { Droppable } from '@hello-pangea/dnd'
 
 const Column = ({ title, status, tasks, onAddTask }) => {
   return (
-    <div className="bg-gray-100 rounded-xl p-4 min-w-[320px] w-[320px] flex flex-col h-full">
+    <div className="bg-gray-100 rounded-xl p-4 min-w-[320px] w-[320px] flex flex-col h-full max-h-full">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <h2 className="font-semibold text-gray-700">{title}</h2>
@@ -14,11 +15,20 @@ const Column = ({ title, status, tasks, onAddTask }) => {
         </div>
       </div>
       
-      <div className="flex-1 overflow-y-auto min-h-0 custom-scrollbar">
-        {tasks.map(task => (
-          <TaskCard key={task.id} task={task} />
-        ))}
-      </div>
+      <Droppable droppableId={status}>
+        {(provided) => (
+          <div 
+            className="flex-1 overflow-y-auto min-h-20 custom-scrollbar"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            {tasks.map((task, index) => (
+              <TaskCard key={task.id} task={task} index={index} />
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
 
       <button
         onClick={() => onAddTask(status)}

@@ -1,7 +1,8 @@
 import React from 'react'
 import { MoreVertical } from 'lucide-react'
+import { Draggable } from '@hello-pangea/dnd'
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, index }) => {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'High': return 'bg-red-100 text-red-700'
@@ -12,18 +13,27 @@ const TaskCard = ({ task }) => {
   }
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm mb-3 border border-gray-100 cursor-grab hover:shadow-md transition-shadow">
-      <div className="flex justify-between items-start mb-2">
-        <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${getPriorityColor(task.priority)}`}>
-          {task.priority}
-        </span>
-        <button className="text-gray-400 hover:text-gray-600">
-          <MoreVertical size={16} />
-        </button>
-      </div>
-      <h3 className="font-semibold text-gray-800 mb-1">{task.title}</h3>
-      <p className="text-gray-500 text-sm line-clamp-2">{task.description}</p>
-    </div>
+    <Draggable draggableId={task.id} index={index}>
+      {(provided) => (
+        <div 
+          className="bg-white p-4 rounded-lg shadow-sm mb-3 border border-gray-100 cursor-grab hover:shadow-md transition-shadow"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <div className="flex justify-between items-start mb-2">
+            <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${getPriorityColor(task.priority)}`}>
+              {task.priority}
+            </span>
+            <button className="text-gray-400 hover:text-gray-600">
+              <MoreVertical size={16} />
+            </button>
+          </div>
+          <h3 className="font-semibold text-gray-800 mb-1">{task.title}</h3>
+          <p className="text-gray-500 text-sm line-clamp-2">{task.description}</p>
+        </div>
+      )}
+    </Draggable>
   )
 }
 
