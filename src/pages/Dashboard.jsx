@@ -8,7 +8,7 @@ import Column from '../components/Column'
 import AddTaskModal from '../components/AddTaskModal'
 
 const Dashboard = () => {
-  const tasks = useSelector(state => state.tasks.items)
+  const { items: tasks, filter } = useSelector(state => state.tasks)
   const dispatch = useDispatch()
   
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -42,9 +42,11 @@ const Dashboard = () => {
     }))
   }
 
-  const todoTasks = tasks.filter(t => t.status === 'todo')
-  const inProgressTasks = tasks.filter(t => t.status === 'inprogress')
-  const doneTasks = tasks.filter(t => t.status === 'done')
+  const filteredTasks = filter === 'All' ? tasks : tasks.filter(t => t.priority === filter)
+  
+  const todoTasks = filteredTasks.filter(t => t.status === 'todo')
+  const inProgressTasks = filteredTasks.filter(t => t.status === 'inprogress')
+  const doneTasks = filteredTasks.filter(t => t.status === 'done')
 
   return (
     <div className="flex bg-gray-50 min-h-screen">
