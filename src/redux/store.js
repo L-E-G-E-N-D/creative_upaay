@@ -6,3 +6,12 @@ export const store = configureStore({
         tasks: tasksReducer,
     },
 })
+
+store.subscribe(() => {
+    try {
+        const tasks = store.getState().tasks.items
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+    } catch (e) {
+        console.error('Failed to save tasks to local storage')
+    }
+})

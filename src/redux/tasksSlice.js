@@ -1,7 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const loadTasksFromStorage = () => {
+    try {
+        const saved = localStorage.getItem('tasks')
+        if (saved) return JSON.parse(saved)
+    } catch (e) {
+        console.error('Failed to load tasks from local storage')
+    }
+    return []
+}
+
 const initialState = {
-    items: [],
+    items: loadTasksFromStorage(),
     filter: 'All'
 }
 
