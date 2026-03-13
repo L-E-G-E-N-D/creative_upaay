@@ -1,25 +1,38 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const defaultState = {
+    items: [],
+    filter: 'All',
+    searchQuery: '',
+    activeTab: 'Tasks',
+    activeProject: 'Mobile App',
+    projects: [
+        { id: '1', name: 'Mobile App', color: 'bg-green-500' },
+        { id: '2', name: 'Website Redesign', color: 'bg-orange-500' },
+        { id: '3', name: 'Design System', color: 'bg-purple-300' },
+        { id: '4', name: 'Wireframes', color: 'bg-blue-400' }
+    ]
+}
+
 const loadStateFromStorage = () => {
     try {
         const saved = localStorage.getItem('appState')
-        if (saved) return JSON.parse(saved)
+        if (saved) {
+            const parsed = JSON.parse(saved)
+            return {
+                ...defaultState,
+                ...parsed,
+                // Ensure arrays stay arrays in case of migration mismatches
+                items: Array.isArray(parsed.items) ? parsed.items : [],
+                projects: Array.isArray(parsed.projects) ? parsed.projects : defaultState.projects,
+                // Ensure strings stay strings
+                searchQuery: parsed.searchQuery || ''
+            }
+        }
     } catch (e) {
         console.error('Failed to load state from local storage')
     }
-    return {
-        items: [],
-        filter: 'All',
-        searchQuery: '',
-        activeTab: 'Tasks',
-        activeProject: 'Mobile App',
-        projects: [
-            { id: '1', name: 'Mobile App', color: 'bg-green-500' },
-            { id: '2', name: 'Website Redesign', color: 'bg-orange-500' },
-            { id: '3', name: 'Design System', color: 'bg-purple-300' },
-            { id: '4', name: 'Wireframes', color: 'bg-blue-400' }
-        ]
-    }
+    return defaultState
 }
 
 const initialState = loadStateFromStorage()
