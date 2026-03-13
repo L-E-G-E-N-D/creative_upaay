@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setFilter } from '../redux/tasksSlice'
+import { setSearchQuery } from '../redux/tasksSlice'
 import { 
   Search, 
   Calendar, 
@@ -10,7 +10,7 @@ import {
 } from 'lucide-react'
 
 const Header = () => {
-  const filter = useSelector(state => state.tasks.filter)
+  const searchQuery = useSelector(state => state.tasks.searchQuery)
   const dispatch = useDispatch()
 
   return (
@@ -23,6 +23,8 @@ const Header = () => {
         </div>
         <input
           type="text"
+          value={searchQuery}
+          onChange={(e) => dispatch(setSearchQuery(e.target.value))}
           placeholder="Search for anything..."
           className="block w-full pl-10 pr-3 py-2.5 bg-[#F5F5F5] border-transparent rounded-lg text-sm placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:ring-1 focus:ring-blue-500 transition-colors"
         />

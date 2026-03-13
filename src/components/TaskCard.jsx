@@ -2,7 +2,7 @@ import React from 'react'
 import { MoreHorizontal, MessageSquare, Folder } from 'lucide-react'
 import { Draggable } from '@hello-pangea/dnd'
 
-const TaskCard = ({ task, index }) => {
+const TaskCard = ({ task, index, onClick }) => {
   const getPriorityStyles = (priority) => {
     switch (priority) {
       case 'High': 
@@ -18,18 +18,9 @@ const TaskCard = ({ task, index }) => {
     }
   }
 
-  // To simulate different user images or amounts of files/comments based on ID hash
-  const getSimulatedData = (id) => {
-    const num = parseInt(id.slice(0, 8), 16) || index; // Pseudo random based on ID
-    return {
-      comments: (num % 15) + 2,
-      files: (num % 5),
-      users: (num % 3) + 1
-    }
-  }
-
-  const simData = getSimulatedData(task.id);
-  const displayPriority = task.status === 'done' ? 'Completed' : task.priority;
+  const commentsCount = task.comments ? task.comments.length : 0
+  const filesCount = task.files ? task.files.length : 0
+  const displayPriority = task.status === 'done' ? 'Completed' : task.priority
 
   return (
     <Draggable draggableId={task.id} index={index}>
@@ -39,12 +30,13 @@ const TaskCard = ({ task, index }) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          onClick={() => onClick(task)}
         >
           <div className="flex justify-between items-center mb-3">
             <span className={`text-[12px] font-medium px-2 py-1 rounded-md ${getPriorityStyles(displayPriority)}`}>
               {displayPriority}
             </span>
-            <button className="text-gray-400 hover:text-gray-900 leading-none h-6 pb-2">
+            <button className="text-gray-400 hover:text-gray-900 leading-none h-6 pb-2" onClick={(e) => e.stopPropagation()}>
               <MoreHorizontal size={20} />
             </button>
           </div>
@@ -59,19 +51,19 @@ const TaskCard = ({ task, index }) => {
 
           <div className="flex items-center justify-between mt-6">
             <div className="flex -space-x-2">
-              {[...Array(simData.users)].map((_, i) => (
-                <img key={i} className="w-6 h-6 rounded-full border-2 border-white object-cover" src={`https://i.pravatar.cc/150?u=${task.id}${i}`} alt="Assignee" />
-              ))}
+              {/* Simulated assignees since generic model doesn't store this yet */}
+              <img className="w-6 h-6 rounded-full border-2 border-white object-cover" src={`https://i.pravatar.cc/150?u=${task.id}1`} alt="Assignee" />
+              <img className="w-6 h-6 rounded-full border-2 border-white object-cover" src={`https://i.pravatar.cc/150?u=${task.id}2`} alt="Assignee" />
             </div>
             
             <div className="flex items-center space-x-3 text-[#787486] text-xs font-medium tracking-wide">
-              <div className="flex items-center space-x-1 hover:text-gray-900 cursor-pointer transition-colors">
+              <div className="flex items-center space-x-1 hover:text-gray-900 transition-colors">
                 <MessageSquare size={14} className="opacity-70" />
-                <span>{simData.comments} comments</span>
+                <span>{commentsCount} comments</span>
               </div>
-              <div className="flex items-center space-x-1 hover:text-gray-900 cursor-pointer transition-colors">
+              <div className="flex items-center space-x-1 hover:text-gray-900 transition-colors">
                 <Folder size={14} className="opacity-70" />
-                <span>{simData.files} files</span>
+                <span>{filesCount} files</span>
               </div>
             </div>
           </div>
