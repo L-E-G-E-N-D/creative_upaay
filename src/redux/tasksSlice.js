@@ -22,10 +22,8 @@ const loadStateFromStorage = () => {
             return {
                 ...defaultState,
                 ...parsed,
-                // Ensure arrays stay arrays in case of migration mismatches
                 items: Array.isArray(parsed.items) ? parsed.items : [],
                 projects: Array.isArray(parsed.projects) ? parsed.projects : defaultState.projects,
-                // Ensure strings stay strings
                 searchQuery: parsed.searchQuery || ''
             }
         }

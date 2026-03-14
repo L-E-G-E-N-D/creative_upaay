@@ -10,7 +10,7 @@ test('check console errors', async ({ page }) => {
     });
 
     await page.goto('http://localhost:5173/');
-    // Wait a bit to let React render
+
     await page.waitForTimeout(2000);
 
     if (errors.length > 0) {

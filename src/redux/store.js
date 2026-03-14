@@ -3,7 +3,7 @@ import tasksReducer from './tasksSlice'
 
 export const store = configureStore({
     reducer: {
-        tasks: tasksReducer, // Key is tasks, but state holds app
+        tasks: tasksReducer,
     },
 })
 

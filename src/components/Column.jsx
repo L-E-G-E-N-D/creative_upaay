@@ -6,8 +6,6 @@ import { Droppable } from '@hello-pangea/dnd'
 const Column = ({ title, status, tasks, onAddTask, colorClass, showAddButton, onOpenTask }) => {
   return (
     <div className="bg-[#F5F5F5] rounded-2xl p-5 min-w-[340px] w-[340px] flex flex-col h-full max-h-[calc(100vh-250px)]">
-      
-      {/* ... previous column code ... */}
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center space-x-2">
           <div className={`w-2 h-2 rounded-full ${colorClass}`}></div>

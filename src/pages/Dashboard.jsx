@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { addTask, reorderTask } from '../redux/tasksSlice'
+import { addTask, reorderTask, setFilter } from '../redux/tasksSlice'
 import { DragDropContext } from '@hello-pangea/dnd'
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
@@ -34,6 +34,8 @@ const Dashboard = () => {
   const [isAddProjectOpen, setIsAddProjectOpen] = useState(false)
   const [isGenericModalOpen, setIsGenericModalOpen] = useState(false)
   const [genericModalConfig, setGenericModalConfig] = useState({ title: '', actionType: '' })
+  
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   const handleOpenModal = (status) => {
     setModalInitialStatus(status)
@@ -95,7 +97,6 @@ const Dashboard = () => {
         <Header />
         
         <main className="px-10 py-8 flex-1 flex flex-col">
-          {/* Top Title Section */}
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center space-x-4">
               <h1 className="text-4xl font-semibold text-[#0D062D]">{activeProject}</h1>
@@ -129,14 +130,36 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Sub Header Section */}
           <div className="flex justify-between items-center mb-10">
             <div className="flex items-center space-x-4">
-              <button className="flex items-center space-x-2 px-3 py-1.5 border border-gray-300 rounded-md text-gray-500 text-sm hover:bg-gray-50">
-                <Filter size={16} />
-                <span>Filter</span>
-                <span className="text-xs ml-1">∨</span>
-              </button>
+              <div className="relative">
+                <button 
+                  onClick={() => setIsFilterOpen(!isFilterOpen)}
+                  className="flex items-center space-x-2 px-3 py-1.5 border border-gray-300 rounded-md text-gray-500 text-sm hover:bg-gray-50"
+                >
+                  <Filter size={16} />
+                  <span>{filter === 'All' ? 'Filter' : `Priority: ${filter}`}</span>
+                  <span className="text-xs ml-1">∨</span>
+                </button>
+                
+                {isFilterOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50 py-1">
+                    <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Priority</div>
+                    {['All', 'High', 'Medium', 'Low'].map(p => (
+                      <button
+                        key={p}
+                        onClick={() => {
+                          dispatch(setFilter(p))
+                          setIsFilterOpen(false)
+                        }}
+                        className={`w-full text-left px-4 py-2 text-sm ${filter === p ? 'bg-purple-50 text-purple-700 font-medium' : 'text-gray-700 hover:bg-gray-50'}`}
+                      >
+                        {p}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
               <button className="flex items-center space-x-2 px-3 py-1.5 border border-gray-300 rounded-md text-gray-500 text-sm hover:bg-gray-50">
                 <Calendar size={16} />
                 <span>Today</span>
@@ -163,7 +186,6 @@ const Dashboard = () => {
           </div>
 
           {activeTab === 'Tasks' ? (
-            /* Kanban Board */
             <DragDropContext onDragEnd={onDragEnd}>
               <div className="flex gap-6 overflow-x-auto pb-4 flex-1 items-start h-full">
                 <Column 

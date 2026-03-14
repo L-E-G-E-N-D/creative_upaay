@@ -7,7 +7,6 @@ body {
   color: #1f2937;
 }
 
-/* Custom Scrollbar for columns */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }

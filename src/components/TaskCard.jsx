@@ -51,7 +51,6 @@ const TaskCard = ({ task, index, onClick }) => {
 
           <div className="flex items-center justify-between mt-6">
             <div className="flex -space-x-2">
-              {/* Simulated assignees since generic model doesn't store this yet */}
               <img className="w-6 h-6 rounded-full border-2 border-white object-cover" src={`https://i.pravatar.cc/150?u=${task.id}1`} alt="Assignee" />
               <img className="w-6 h-6 rounded-full border-2 border-white object-cover" src={`https://i.pravatar.cc/150?u=${task.id}2`} alt="Assignee" />
             </div>

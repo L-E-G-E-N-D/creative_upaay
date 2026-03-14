@@ -16,7 +16,6 @@ const Header = () => {
   return (
     <header className="h-[88px] bg-white border-b border-gray-200 flex items-center justify-between px-10 sticky top-0 z-10 md:pl-[290px]">
       
-      {/* Search Bar */}
       <div className="relative w-96 hidden md:block">
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <Search size={18} className="text-gray-400" />
@@ -29,8 +28,6 @@ const Header = () => {
           className="block w-full pl-10 pr-3 py-2.5 bg-[#F5F5F5] border-transparent rounded-lg text-sm placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:ring-1 focus:ring-blue-500 transition-colors"
         />
       </div>
-
-      {/* Right side icons and profile */}
       <div className="flex items-center space-x-6 ml-auto">
         <div className="flex items-center space-x-5 text-gray-400">
           <button className="hover:text-gray-600">

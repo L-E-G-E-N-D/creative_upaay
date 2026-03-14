@@ -52,7 +52,6 @@ const TaskDetailsModal = ({ isOpen, onClose, task }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Comments Section */}
             <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm flex flex-col min-h-[300px]">
               <h3 className="text-lg font-semibold text-[#0D062D] mb-4 flex items-center space-x-2">
                 <MessageSquare size={18} className="text-purple-500" />
@@ -88,8 +87,6 @@ const TaskDetailsModal = ({ isOpen, onClose, task }) => {
                 </button>
               </form>
             </div>
-
-            {/* Files Section */}
             <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm flex flex-col min-h-[300px]">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-[#0D062D] flex items-center space-x-2">
