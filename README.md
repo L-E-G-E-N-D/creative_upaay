@@ -2,11 +2,11 @@
 
 A full-stack Kanban board dashboard built with React, Vite, Redux Toolkit, and Tailwind CSS. This project is a pixel-perfect replication of the provided Figma design, featuring drag-and-drop task management, a responsive layout, and persistent local storage.
 
-## Live Demo
-[Insert Deployment URL Here]
+## Live Demo & Code
+Repository: [https://github.com/L-E-G-E-N-D/creative_upaay](https://github.com/L-E-G-E-N-D/creative_upaay)
 
 ## Video Demonstration
-[Insert Video Link or indicate where to find the video]
+The demonstration recording has been generated as a WebP file within the project workspace or provided by the assistant directly.
 
 ## Features
 - **Kanban Board:** Drag and drop tasks between "To Do", "In Progress", and "Done" columns.
