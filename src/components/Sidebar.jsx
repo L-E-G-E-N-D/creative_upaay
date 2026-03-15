@@ -10,8 +10,10 @@ import {
   Plus,
   MoreHorizontal,
   Lightbulb,
-  ChevronsLeft
+  ChevronsLeft,
+  LogOut
 } from 'lucide-react'
+import { logout } from '../redux/authSlice'
 
 const Sidebar = ({ onOpenAddProject }) => {
   const { activeTab, activeProject, projects } = useSelector(state => state.tasks)
@@ -98,8 +100,15 @@ const Sidebar = ({ onOpenAddProject }) => {
           <p className="text-xs text-gray-500 mb-3 text-center leading-relaxed">
             We don't have any notice for you, till then you can share your thoughts with your peers.
           </p>
-          <button className="bg-white px-4 py-2 text-sm font-medium text-[#0D062D] rounded-lg shadow-sm border border-gray-100 hover:bg-gray-50 w-full transition-colors">
+          <button className="bg-white px-4 py-2 text-sm font-medium text-[#0D062D] rounded-lg shadow-sm border border-gray-100 hover:bg-gray-50 w-full transition-colors mb-3">
             Write a message
+          </button>
+          <button 
+            onClick={() => dispatch(logout())}
+            className="flex items-center justify-center space-x-2 bg-red-50 text-red-600 px-4 py-2 text-sm font-medium rounded-lg shadow-sm w-full hover:bg-red-100 transition-colors"
+          >
+            <LogOut size={16} />
+            <span>Log Out</span>
           </button>
         </div>
       </div>
