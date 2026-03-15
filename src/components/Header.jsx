@@ -11,6 +11,7 @@ import {
 
 const Header = () => {
   const searchQuery = useSelector(state => state.tasks.searchQuery)
+  const user = useSelector(state => state.auth.user)
   const dispatch = useDispatch()
 
   return (
@@ -44,13 +45,13 @@ const Header = () => {
 
         <div className="flex items-center space-x-4">
           <div className="text-right hidden sm:block">
-            <p className="text-sm font-medium text-[#0D062D]">Palak Jain</p>
+            <p className="text-sm font-medium text-[#0D062D]">{user ? user.name : 'Guest User'}</p>
             <p className="text-xs text-gray-500">Rajasthan, India</p>
           </div>
           <div className="flex items-center space-x-2 cursor-pointer">
             <img 
               className="h-10 w-10 rounded-full object-cover" 
-              src="https://i.pravatar.cc/150?u=palak" 
+              src={`https://i.pravatar.cc/150?u=${user ? user.email : 'guest'}`} 
               alt="User avatar" 
             />
             <ChevronDown size={16} className="text-gray-500" />
