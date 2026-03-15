@@ -7,7 +7,9 @@ A full-stack Kanban board dashboard built with React, Vite, Redux Toolkit, and T
 * **Code Repository:** [https://github.com/L-E-G-E-N-D/creative_upaay](https://github.com/L-E-G-E-N-D/creative_upaay)
 
 ## Video Demonstration
-![Kanban Board Demonstration](./compressed_upaay.m4v)
+<video src="https://github.com/L-E-G-E-N-D/creative_upaay/raw/main/compressed_upaay.mp4" controls="controls" style="max-width: 100%;"></video>
+
+*(If the video doesn't load above, [click here to view it directly](https://github.com/L-E-G-E-N-D/creative_upaay/raw/main/compressed_upaay.mp4))*
 
 ## Features
 - **Kanban Board:** Drag and drop tasks between "To Do", "In Progress", and "Done" columns.
